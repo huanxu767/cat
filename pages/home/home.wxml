@@ -1,0 +1,138 @@
+<!--年薪百万首页-->
+<view class="container">
+  <!-- 顶部欢迎区域 -->
+  <view class="welcome-section">
+    <view class="welcome-text">
+      <text class="greeting">{{greeting}}</text>
+      <text class="subtitle">距离年薪百万，你还有多远？</text>
+    </view>
+    <image class="welcome-icon" src="/images/money-icon.png" mode="aspectFit"></image>
+  </view>
+
+  <!-- 当前状态卡片 -->
+  <view class="status-card">
+    <view class="card-header">
+      <text class="card-title">当前状态</text>
+      <text class="update-time">更新于 {{updateTime}}</text>
+    </view>
+    
+    <view class="salary-display">
+      <view class="current-salary">
+        <text class="label">当前年薪</text>
+        <text class="amount">¥{{formatSalary(userData.currentSalary)}}</text>
+        <text class="position">{{userData.currentPosition || '未设置职位'}}</text>
+      </view>
+      
+      <view class="target-salary">
+        <text class="label">目标年薪</text>
+        <text class="amount target">¥{{formatSalary(userData.targetSalary)}}</text>
+        <text class="position">{{userData.targetPosition || '未设置目标'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 进度展示 -->
+  <view class="progress-card">
+    <view class="card-header">
+      <text class="card-title">完成进度</text>
+      <text class="percentage">{{progressPercentage}}%</text>
+    </view>
+    
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progressPercentage}}%"></view>
+    </view>
+    
+    <view class="progress-info">
+      <text class="gap-amount">还需提升：¥{{formatSalary(salaryGap)}}</text>
+      <text class="achievement-count">已完成目标：{{completedGoals}}/{{totalGoals}}</text>
+    </view>
+  </view>
+
+  <!-- 今日任务 -->
+  <view class="today-tasks">
+    <view class="card-header">
+      <text class="card-title">今日任务</text>
+      <text class="task-count">{{todayTasks.length}}项</text>
+    </view>
+    
+    <view class="task-list" wx:if="{{todayTasks.length > 0}}">
+      <view class="task-item" wx:for="{{todayTasks}}" wx:key="id">
+        <view class="task-checkbox {{item.completed ? 'checked' : ''}}" 
+              bindtap="toggleTask" data-id="{{item.id}}">
+          <text class="checkmark" wx:if="{{item.completed}}">✓</text>
+        </view>
+        <text class="task-text {{item.completed ? 'completed' : ''}}">{{item.title}}</text>
+      </view>
+    </view>
+    
+    <view class="empty-tasks" wx:else>
+      <text>今天暂无任务，去制定学习计划吧！</text>
+      <button class="mini-btn" bindtap="goToPlan">制定计划</button>
+    </view>
+  </view>
+
+  <!-- 快速操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="updateSalary">
+      <image class="action-icon" src="/images/salary-icon.png"></image>
+      <text class="action-text">更新薪资</text>
+    </view>
+    
+    <view class="action-item" bindtap="addSkill">
+      <image class="action-icon" src="/images/skill-icon.png"></image>
+      <text class="action-text">添加技能</text>
+    </view>
+    
+    <view class="action-item" bindtap="viewProgress">
+      <image class="action-icon" src="/images/chart-icon.png"></image>
+      <text class="action-text">查看详情</text>
+    </view>
+    
+    <view class="action-item" bindtap="shareProgress">
+      <image class="action-icon" src="/images/share-icon.png"></image>
+      <text class="action-text">分享进度</text>
+    </view>
+  </view>
+
+  <!-- 励志语录 -->
+  <view class="motivation-card">
+    <view class="quote-icon">"</view>
+    <text class="quote-text">{{motivationQuote}}</text>
+    <text class="quote-author">— {{quoteAuthor}}</text>
+  </view>
+
+  <!-- 激励功能区域 -->
+  <view class="reward-section">
+    <view class="reward-card">
+      <view class="reward-header">
+        <text class="reward-title">观看广告获得奖励</text>
+        <text class="reward-subtitle">看广告解锁更多功能</text>
+      </view>
+      
+      <view class="reward-benefits">
+        <view class="benefit-item">
+          <text class="benefit-icon">💰</text>
+          <text class="benefit-text">获得学习积分</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-icon">🔓</text>
+          <text class="benefit-text">解锁高级功能</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-icon">📊</text>
+          <text class="benefit-text">查看详细报告</text>
+        </view>
+      </view>
+      
+      <button class="watch-ad-btn" bindtap="watchRewardedAd">
+        <text class="btn-icon">📺</text>
+        <text class="btn-text">观看视频广告</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- Banner广告占位 -->
+  <view class="banner-ad-placeholder" wx:if="{{showBannerAd}}">
+    <text class="ad-label">广告</text>
+  </view>
+</view>

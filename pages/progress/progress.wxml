@@ -1,0 +1,154 @@
+<!--进度页面-->
+<view class="container">
+  <!-- 总体进度卡片 -->
+  <view class="progress-overview">
+    <view class="overview-header">
+      <text class="overview-title">年薪百万进度</text>
+      <text class="overview-percentage">{{overallProgress}}%</text>
+    </view>
+    
+    <view class="circular-progress">
+      <view class="progress-ring">
+        <view class="progress-fill" style="stroke-dasharray: {{progressStroke}} 314;"></view>
+      </view>
+      <view class="progress-center">
+        <text class="center-percentage">{{overallProgress}}%</text>
+        <text class="center-label">完成度</text>
+      </view>
+    </view>
+    
+    <view class="progress-details">
+      <view class="detail-item">
+        <text class="detail-label">当前年薪</text>
+        <text class="detail-value">¥{{formatSalary(userData.currentSalary)}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">目标年薪</text>
+        <text class="detail-value">¥{{formatSalary(userData.targetSalary)}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">还需提升</text>
+        <text class="detail-value gap">¥{{formatSalary(salaryGap)}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 各维度进度 -->
+  <view class="dimensions-progress">
+    <view class="section-title">各维度进度</view>
+    
+    <view class="dimension-item" wx:for="{{dimensions}}" wx:key="id">
+      <view class="dimension-header">
+        <view class="dimension-info">
+          <text class="dimension-name">{{item.name}}</text>
+          <text class="dimension-desc">{{item.description}}</text>
+        </view>
+        <text class="dimension-percentage">{{item.progress}}%</text>
+      </view>
+      
+      <view class="dimension-progress-bar">
+        <view class="dimension-progress-fill" style="width: {{item.progress}}%; background: {{item.color}};"></view>
+      </view>
+      
+      <view class="dimension-goals">
+        <view class="goal-item {{goal.completed ? 'completed' : ''}}" 
+              wx:for="{{item.goals}}" wx:for-item="goal" wx:key="id">
+          <view class="goal-checkbox">
+            <text class="checkmark" wx:if="{{goal.completed}}">✓</text>
+          </view>
+          <text class="goal-text">{{goal.title}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 月度统计 -->
+  <view class="monthly-stats">
+    <view class="section-title">本月统计</view>
+    
+    <view class="stats-grid">
+      <view class="stat-card">
+        <text class="stat-number">{{monthlyStats.completedTasks}}</text>
+        <text class="stat-label">完成任务</text>
+        <text class="stat-change positive">+{{monthlyStats.taskIncrease}}</text>
+      </view>
+      
+      <view class="stat-card">
+        <text class="stat-number">{{monthlyStats.studyHours}}</text>
+        <text class="stat-label">学习时长</text>
+        <text class="stat-change positive">+{{monthlyStats.hourIncrease}}h</text>
+      </view>
+      
+      <view class="stat-card">
+        <text class="stat-number">{{monthlyStats.skillPoints}}</text>
+        <text class="stat-label">技能积分</text>
+        <text class="stat-change positive">+{{monthlyStats.pointIncrease}}</text>
+      </view>
+      
+      <view class="stat-card">
+        <text class="stat-number">{{monthlyStats.achievements}}</text>
+        <text class="stat-label">获得成就</text>
+        <text class="stat-change">本月新增</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成就系统 -->
+  <view class="achievements">
+    <view class="section-title">成就系统</view>
+    
+    <view class="achievement-categories">
+      <view class="category-tab {{activeCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{achievementCategories}}" wx:key="id"
+            bindtap="switchCategory" data-category="{{item.id}}">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+    
+    <view class="achievement-list">
+      <view class="achievement-item {{achievement.unlocked ? 'unlocked' : ''}}" 
+            wx:for="{{currentAchievements}}" wx:key="id">
+        <view class="achievement-icon">
+          <text class="icon">{{achievement.icon}}</text>
+        </view>
+        <view class="achievement-content">
+          <text class="achievement-title">{{achievement.title}}</text>
+          <text class="achievement-desc">{{achievement.description}}</text>
+          <view class="achievement-progress" wx:if="{{!achievement.unlocked}}">
+            <text class="progress-text">{{achievement.current}}/{{achievement.target}}</text>
+            <view class="mini-progress-bar">
+              <view class="mini-progress-fill" 
+                    style="width: {{achievement.current / achievement.target * 100}}%"></view>
+            </view>
+          </view>
+        </view>
+        <view class="achievement-reward" wx:if="{{achievement.unlocked}}">
+          <text class="reward-text">+{{achievement.reward}}积分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="history">
+    <view class="section-title">进度历史</view>
+    
+    <view class="history-timeline">
+      <view class="timeline-item" wx:for="{{progressHistory}}" wx:key="id">
+        <view class="timeline-date">
+          <text class="date-month">{{item.month}}</text>
+          <text class="date-year">{{item.year}}</text>
+        </view>
+        <view class="timeline-content">
+          <text class="timeline-title">{{item.title}}</text>
+          <text class="timeline-desc">{{item.description}}</text>
+          <view class="timeline-metrics">
+            <text class="metric">薪资: ¥{{formatSalary(item.salary)}}</text>
+            <text class="metric">技能: {{item.skills}}项</text>
+            <text class="metric">成就: {{item.achievements}}个</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

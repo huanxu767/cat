@@ -1,0 +1,624 @@
+/* 规划页面样式 */
+.container {
+  padding: 0;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Tab栏样式 */
+.tab-bar {
+  display: flex;
+  background: white;
+  border-bottom: 1rpx solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  color: #666;
+  font-size: 28rpx;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  color: #1976D2;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background: #1976D2;
+  border-radius: 2rpx;
+}
+
+/* Tab内容区域 */
+.tab-content {
+  padding: 20rpx;
+}
+
+/* 卡片样式 */
+.section-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-btn {
+  background: #E3F2FD;
+  color: #1976D2;
+  font-size: 24rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  border: none;
+}
+
+/* 状态网格 */
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.status-item {
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  text-align: center;
+}
+
+.status-label {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.status-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+/* 时间线样式 */
+.goal-timeline {
+  position: relative;
+}
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 20rpx;
+  top: 50rpx;
+  width: 2rpx;
+  height: calc(100% + 20rpx);
+  background: #e0e0e0;
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+.timeline-dot {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #1976D2;
+  margin-right: 30rpx;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-item.completed .timeline-dot {
+  background: #4CAF50;
+}
+
+.timeline-content {
+  flex: 1;
+  padding-top: 5rpx;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.goal-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.goal-deadline {
+  font-size: 24rpx;
+  color: #FF6B6B;
+  background: #FFE5E5;
+  padding: 6rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.goal-description {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.goal-progress {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #1976D2;
+  font-weight: bold;
+}
+
+.mini-progress-bar {
+  flex: 1;
+  height: 8rpx;
+  background: #e0e0e0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.mini-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1976D2, #42A5F5);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+/* 职业路径 */
+.career-path {
+  position: relative;
+}
+
+.path-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.path-step.current {
+  background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  border: 2rpx solid #1976D2;
+}
+
+.path-step.completed {
+  background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
+  border: 2rpx solid #4CAF50;
+}
+
+.step-number {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: #ddd;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.path-step.current .step-number {
+  background: #1976D2;
+}
+
+.path-step.completed .step-number {
+  background: #4CAF50;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.step-salary {
+  font-size: 26rpx;
+  color: #1976D2;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.step-time {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+}
+
+/* 技能网格 */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.skill-item {
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.skill-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.skill-level {
+  font-size: 24rpx;
+  color: #1976D2;
+  font-weight: bold;
+}
+
+.skill-bar {
+  height: 8rpx;
+  background: #e0e0e0;
+  border-radius: 4rpx;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1976D2, #42A5F5);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.skill-category {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 推荐技能 */
+.recommended-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.recommend-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.recommend-content {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.recommend-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.recommend-reason {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.recommend-salary {
+  font-size: 24rpx;
+  color: #4CAF50;
+  font-weight: bold;
+  display: block;
+}
+
+.learn-btn {
+  background: #1976D2;
+  color: white;
+  font-size: 24rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 20rpx;
+  border: none;
+}
+
+/* 学习日历 */
+.learning-calendar {
+  margin-bottom: 30rpx;
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.calendar-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10rpx;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.day-number {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.day-tasks {
+  display: flex;
+  gap: 4rpx;
+  margin-top: 4rpx;
+}
+
+.task-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: #1976D2;
+}
+
+/* 学习统计 */
+.learning-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40rpx;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1976D2;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 进度图表 */
+.progress-chart {
+  margin-bottom: 30rpx;
+}
+
+.chart-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  height: 200rpx;
+}
+
+.chart-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60rpx;
+}
+
+.bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #1976D2, #42A5F5);
+  border-radius: 4rpx 4rpx 0 0;
+  margin-bottom: 10rpx;
+  transition: height 0.3s ease;
+}
+
+.bar-label {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 资源列表 */
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.resource-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.resource-content {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.resource-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.resource-description {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.resource-meta {
+  display: flex;
+  gap: 20rpx;
+  font-size: 22rpx;
+  color: #999;
+}
+
+.resource-btn {
+  background: #1976D2;
+  color: white;
+  font-size: 24rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 20rpx;
+  border: none;
+}
+
+/* 添加按钮 */
+.add-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #1976D2, #42A5F5);
+  color: white;
+  font-size: 28rpx;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  border: none;
+  margin-top: 20rpx;
+}
+
+/* 浮动按钮 */
+.floating-actions {
+  position: fixed;
+  bottom: 120rpx;
+  right: 30rpx;
+  z-index: 1000;
+}
+
+.floating-btn {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1976D2, #42A5F5);
+  color: white;
+  padding: 20rpx 30rpx;
+  border-radius: 50rpx;
+  box-shadow: 0 8rpx 20rpx rgba(25, 118, 210, 0.3);
+  border: none;
+  font-size: 26rpx;
+}
+
+.btn-icon {
+  margin-right: 10rpx;
+  font-size: 32rpx;
+}
+
+/* 响应式适配 */
+@media (max-width: 375px) {
+  .status-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .learning-stats {
+    flex-direction: column;
+    gap: 20rpx;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tab-content {
+  animation: slideInRight 0.3s ease-out;
+}

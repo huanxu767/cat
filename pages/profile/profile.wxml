@@ -1,0 +1,125 @@
+<!--个人中心页面-->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-avatar">
+      <image class="avatar-img" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+    </view>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.nickName || '未设置昵称'}}</text>
+      <text class="user-level">Lv.{{userLevel}} 职场新星</text>
+      <view class="user-points">
+        <text class="points-icon">💰</text>
+        <text class="points-text">积分: {{userPoints}}</text>
+      </view>
+    </view>
+    <button class="edit-profile-btn" bindtap="editProfile">编辑</button>
+  </view>
+
+  <!-- 会员状态 -->
+  <view class="premium-card" wx:if="{{!isPremium}}">
+    <view class="premium-header">
+      <text class="premium-title">升级高级会员</text>
+      <text class="premium-subtitle">解锁所有功能，去除广告</text>
+    </view>
+    <view class="premium-benefits">
+      <view class="benefit-item">
+        <text class="benefit-icon">🚫</text>
+        <text class="benefit-text">去除所有广告</text>
+      </view>
+      <view class="benefit-item">
+        <text class="benefit-icon">📊</text>
+        <text class="benefit-text">高级数据分析</text>
+      </view>
+      <view class="benefit-item">
+        <text class="benefit-icon">🎯</text>
+        <text class="benefit-text">个性化规划</text>
+      </view>
+    </view>
+    <button class="upgrade-btn" bindtap="upgradePremium">立即升级 ¥9.9/月</button>
+  </view>
+
+  <!-- 高级会员状态 -->
+  <view class="premium-active-card" wx:else>
+    <view class="premium-status">
+      <text class="status-icon">👑</text>
+      <text class="status-text">高级会员</text>
+      <text class="expire-text">有效期至: {{premiumExpiry}}</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToSettings">
+      <view class="menu-icon">⚙️</view>
+      <text class="menu-text">设置</text>
+      <view class="menu-arrow">></view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToAdSettings">
+      <view class="menu-icon">📺</view>
+      <text class="menu-text">广告设置</text>
+      <view class="menu-arrow">></view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToDataBackup">
+      <view class="menu-icon">☁️</view>
+      <text class="menu-text">数据备份</text>
+      <view class="menu-arrow">></view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToHelp">
+      <view class="menu-icon">❓</view>
+      <text class="menu-text">帮助与反馈</text>
+      <view class="menu-arrow">></view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToAbout">
+      <view class="menu-icon">ℹ️</view>
+      <text class="menu-text">关于我们</text>
+      <view class="menu-arrow">></view>
+    </view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-section">
+    <view class="section-title">我的统计</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">{{stats.totalDays}}</text>
+        <text class="stat-label">使用天数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{stats.completedTasks}}</text>
+        <text class="stat-label">完成任务</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{stats.studyHours}}</text>
+        <text class="stat-label">学习时长</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{stats.achievements}}</text>
+        <text class="stat-label">获得成就</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告收益展示（开发者可见） -->
+  <view class="ad-revenue-section" wx:if="{{showAdRevenue}}">
+    <view class="section-title">广告收益</view>
+    <view class="revenue-stats">
+      <view class="revenue-item">
+        <text class="revenue-label">今日收益</text>
+        <text class="revenue-value">¥{{adRevenue.today}}</text>
+      </view>
+      <view class="revenue-item">
+        <text class="revenue-label">本月收益</text>
+        <text class="revenue-value">¥{{adRevenue.thisMonth}}</text>
+      </view>
+      <view class="revenue-item">
+        <text class="revenue-label">总收益</text>
+        <text class="revenue-value">¥{{adRevenue.total}}</text>
+      </view>
+    </view>
+  </view>
+</view>
