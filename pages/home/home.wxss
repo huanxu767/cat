@@ -1,0 +1,356 @@
+/* 首页样式 */
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 欢迎区域 */
+.welcome-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1976D2, #42A5F5);
+  color: white;
+  padding: 40rpx 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(25, 118, 210, 0.3);
+}
+
+.welcome-text {
+  flex: 1;
+}
+
+.greeting {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+  display: block;
+}
+
+.welcome-icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 20rpx;
+}
+
+/* 卡片通用样式 */
+.status-card,
+.progress-card,
+.today-tasks,
+.motivation-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.update-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 薪资展示 */
+.salary-display {
+  display: flex;
+  justify-content: space-between;
+  gap: 30rpx;
+}
+
+.current-salary,
+.target-salary {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 20rpx;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+}
+
+.target-salary {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: white;
+}
+
+.label {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.target-salary .label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.amount {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1976D2;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.amount.target {
+  color: white;
+}
+
+.position {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+}
+
+.target-salary .position {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 进度展示 */
+.percentage {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1976D2;
+}
+
+.progress-bar {
+  height: 16rpx;
+  background: #e0e0e0;
+  border-radius: 8rpx;
+  margin: 20rpx 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1976D2, #42A5F5);
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.gap-amount {
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.achievement-count {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* 今日任务 */
+.task-count {
+  font-size: 26rpx;
+  color: #1976D2;
+  background: #E3F2FD;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.task-list {
+  margin-top: 20rpx;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.task-checkbox.checked {
+  background: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.checkmark {
+  color: white;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.empty-tasks {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #999;
+}
+
+.mini-btn {
+  background: #1976D2;
+  color: white;
+  font-size: 26rpx;
+  padding: 16rpx 32rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+}
+
+/* 快速操作 */
+.quick-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.action-item {
+  flex: 1;
+  background: white;
+  padding: 30rpx 20rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.action-item:active {
+  transform: scale(0.95);
+}
+
+.action-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 15rpx;
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: #333;
+  display: block;
+}
+
+/* 励志语录 */
+.motivation-card {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-icon {
+  font-size: 120rpx;
+  opacity: 0.1;
+  position: absolute;
+  top: -20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: serif;
+}
+
+.quote-text {
+  font-size: 30rpx;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-author {
+  font-size: 26rpx;
+  opacity: 0.8;
+  font-style: italic;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* 响应式适配 */
+@media (max-width: 375px) {
+  .salary-display {
+    flex-direction: column;
+    gap: 20rpx;
+  }
+  
+  .quick-actions {
+    flex-wrap: wrap;
+  }
+  
+  .action-item {
+    width: calc(50% - 10rpx);
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-card,
+.progress-card,
+.today-tasks,
+.motivation-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.progress-card {
+  animation-delay: 0.1s;
+}
+
+.today-tasks {
+  animation-delay: 0.2s;
+}
+
+.motivation-card {
+  animation-delay: 0.3s;
+}

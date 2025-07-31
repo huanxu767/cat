@@ -1,0 +1,228 @@
+<!--规划页面-->
+<view class="container">
+  <!-- 顶部Tab切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'career' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="career">
+      <text>职业规划</text>
+    </view>
+    <view class="tab-item {{activeTab === 'skills' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="skills">
+      <text>技能提升</text>
+    </view>
+    <view class="tab-item {{activeTab === 'learning' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="learning">
+      <text>学习计划</text>
+    </view>
+  </view>
+
+  <!-- 职业规划Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 'career'}}">
+    <!-- 当前状态 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">当前状态</text>
+        <button class="edit-btn" bindtap="editCurrentStatus">编辑</button>
+      </view>
+      
+      <view class="status-grid">
+        <view class="status-item">
+          <text class="status-label">当前职位</text>
+          <text class="status-value">{{userData.currentPosition || '未设置'}}</text>
+        </view>
+        <view class="status-item">
+          <text class="status-label">工作年限</text>
+          <text class="status-value">{{userData.workYears || 0}}年</text>
+        </view>
+        <view class="status-item">
+          <text class="status-label">所在行业</text>
+          <text class="status-value">{{userData.industry || '未设置'}}</text>
+        </view>
+        <view class="status-item">
+          <text class="status-label">工作城市</text>
+          <text class="status-value">{{userData.city || '未设置'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 目标设定 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">目标设定</text>
+        <button class="edit-btn" bindtap="editTargetGoals">编辑</button>
+      </view>
+      
+      <view class="goal-timeline">
+        <view class="timeline-item {{goal.completed ? 'completed' : ''}}" 
+              wx:for="{{careerGoals}}" wx:key="id">
+          <view class="timeline-dot"></view>
+          <view class="timeline-content">
+            <view class="goal-header">
+              <text class="goal-title">{{item.title}}</text>
+              <text class="goal-deadline">{{item.deadline}}</text>
+            </view>
+            <text class="goal-description">{{item.description}}</text>
+            <view class="goal-progress">
+              <text class="progress-text">进度: {{item.progress}}%</text>
+              <view class="mini-progress-bar">
+                <view class="mini-progress-fill" style="width: {{item.progress}}%"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <button class="add-btn" bindtap="addCareerGoal">+ 添加新目标</button>
+    </view>
+
+    <!-- 职业路径 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">职业发展路径</text>
+      </view>
+      
+      <view class="career-path">
+        <view class="path-step {{step.current ? 'current' : step.completed ? 'completed' : ''}}" 
+              wx:for="{{careerPath}}" wx:key="id">
+          <view class="step-number">{{index + 1}}</view>
+          <view class="step-content">
+            <text class="step-title">{{item.title}}</text>
+            <text class="step-salary">目标薪资: ¥{{formatSalary(item.salary)}}</text>
+            <text class="step-time">预计时间: {{item.timeframe}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 技能提升Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 'skills'}}">
+    <!-- 技能评估 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">技能评估</text>
+        <button class="edit-btn" bindtap="addSkill">添加技能</button>
+      </view>
+      
+      <view class="skills-grid">
+        <view class="skill-item" wx:for="{{userSkills}}" wx:key="id">
+          <view class="skill-header">
+            <text class="skill-name">{{item.name}}</text>
+            <text class="skill-level">{{item.level}}/5</text>
+          </view>
+          <view class="skill-bar">
+            <view class="skill-fill" style="width: {{item.level * 20}}%"></view>
+          </view>
+          <text class="skill-category">{{item.category}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐技能 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">推荐学习技能</text>
+      </view>
+      
+      <view class="recommended-skills">
+        <view class="recommend-item" wx:for="{{recommendedSkills}}" wx:key="id">
+          <view class="recommend-content">
+            <text class="recommend-name">{{item.name}}</text>
+            <text class="recommend-reason">{{item.reason}}</text>
+            <text class="recommend-salary">薪资提升: +{{item.salaryIncrease}}%</text>
+          </view>
+          <button class="learn-btn" bindtap="startLearning" data-skill="{{item}}">开始学习</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习计划Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 'learning'}}">
+    <!-- 当前学习计划 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">学习计划</text>
+        <button class="edit-btn" bindtap="createLearningPlan">制定计划</button>
+      </view>
+      
+      <view class="learning-calendar">
+        <view class="calendar-header">
+          <text class="calendar-title">{{currentMonth}}</text>
+        </view>
+        
+        <view class="calendar-grid">
+          <view class="calendar-day" wx:for="{{calendarDays}}" wx:key="date">
+            <text class="day-number">{{item.day}}</text>
+            <view class="day-tasks" wx:if="{{item.tasks.length > 0}}">
+              <view class="task-dot" wx:for="{{item.tasks}}" wx:for-item="task" wx:key="id"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习进度 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">学习进度</text>
+      </view>
+      
+      <view class="learning-stats">
+        <view class="stat-item">
+          <text class="stat-number">{{learningStats.totalHours}}</text>
+          <text class="stat-label">总学习时长</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-number">{{learningStats.completedCourses}}</text>
+          <text class="stat-label">完成课程</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-number">{{learningStats.currentStreak}}</text>
+          <text class="stat-label">连续学习天数</text>
+        </view>
+      </view>
+      
+      <view class="progress-chart">
+        <text class="chart-title">本月学习时长</text>
+        <view class="chart-bars">
+          <view class="chart-bar" wx:for="{{weeklyHours}}" wx:key="week">
+            <view class="bar-fill" style="height: {{item.percentage}}%"></view>
+            <text class="bar-label">第{{index + 1}}周</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习资源推荐 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">推荐资源</text>
+      </view>
+      
+      <view class="resource-list">
+        <view class="resource-item" wx:for="{{recommendedResources}}" wx:key="id">
+          <image class="resource-icon" src="{{item.icon}}"></image>
+          <view class="resource-content">
+            <text class="resource-title">{{item.title}}</text>
+            <text class="resource-description">{{item.description}}</text>
+            <view class="resource-meta">
+              <text class="resource-type">{{item.type}}</text>
+              <text class="resource-duration">{{item.duration}}</text>
+              <text class="resource-rating">⭐ {{item.rating}}</text>
+            </view>
+          </view>
+          <button class="resource-btn" bindtap="openResource" data-url="{{item.url}}">查看</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部浮动按钮 -->
+<view class="floating-actions">
+  <button class="floating-btn primary" bindtap="quickAction">
+    <text class="btn-icon">⚡</text>
+    <text class="btn-text">快速规划</text>
+  </button>
+</view>
