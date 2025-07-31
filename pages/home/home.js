@@ -12,7 +12,9 @@ Page({
     totalGoals: 10,
     todayTasks: [],
     motivationQuote: '成功不是终点，失败不是末日，继续前进的勇气才最可贵。',
-    quoteAuthor: '温斯顿·丘吉尔'
+    quoteAuthor: '温斯顿·丘吉尔',
+    showBannerAd: false,
+    userPoints: 0 // 用户积分
   },
 
   onLoad: function (options) {
@@ -23,6 +25,21 @@ Page({
   onShow: function () {
     console.log('首页显示')
     this.refreshData()
+    this.showBannerAdWithDelay()
+  },
+
+  onHide: function () {
+    // 隐藏Banner广告
+    if (app.globalData.adManager) {
+      app.globalData.adManager.hideBannerAd()
+    }
+  },
+
+  onUnload: function () {
+    // 页面卸载时隐藏Banner广告
+    if (app.globalData.adManager) {
+      app.globalData.adManager.hideBannerAd()
+    }
   },
 
   // 初始化页面
@@ -244,6 +261,90 @@ Page({
     return {
       title: `年薪百万进度${progressPercentage}%，持续努力中！`,
       imageUrl: '/images/share-image.png'
+    }
+  },
+
+  // 延迟显示Banner广告
+  showBannerAdWithDelay: function() {
+    setTimeout(() => {
+      if (app.globalData.adManager) {
+        app.globalData.adManager.showBannerAd()
+        this.setData({ showBannerAd: true })
+      }
+    }, 3000) // 3秒后显示Banner广告
+  },
+
+  // 观看激励视频广告
+  watchRewardedAd: function() {
+    if (!app.globalData.adManager) {
+      wx.showToast({
+        title: '广告功能暂不可用',
+        icon: 'none'
+      })
+      return
+    }
+
+    wx.showLoading({
+      title: '加载广告中...'
+    })
+
+    app.globalData.adManager.showRewardedVideoAd(
+      // 观看完成回调
+      () => {
+        wx.hideLoading()
+        
+        // 给用户奖励
+        const points = 50
+        const currentPoints = this.data.userPoints + points
+        this.setData({ userPoints: currentPoints })
+        
+        // 保存积分到本地存储
+        wx.setStorageSync('userPoints', currentPoints)
+        
+        wx.showModal({
+          title: '恭喜获得奖励！',
+          content: `您获得了${points}学习积分！\n当前总积分：${currentPoints}`,
+          showCancel: false,
+          confirmText: '太棒了',
+          success: () => {
+            // 可以在这里解锁一些高级功能
+            this.unlockPremiumFeatures()
+          }
+        })
+      },
+      // 错误回调
+      (error) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '广告加载失败',
+          icon: 'none'
+        })
+        console.error('激励视频广告错误:', error)
+      }
+    )
+  },
+
+  // 解锁高级功能
+  unlockPremiumFeatures: function() {
+    const userData = { ...this.data.userData }
+    userData.premiumUnlocked = true
+    userData.premiumExpiry = Date.now() + 24 * 60 * 60 * 1000 // 24小时有效期
+    
+    this.setData({ userData })
+    wx.setStorageSync('userData', userData)
+    app.globalData.userData = userData
+    
+    wx.showToast({
+      title: '高级功能已解锁24小时',
+      icon: 'success',
+      duration: 2000
+    })
+  },
+
+  // 显示插屏广告（在特定操作后调用）
+  showInterstitialAd: function() {
+    if (app.globalData.adManager) {
+      app.globalData.adManager.showInterstitialAd()
     }
   }
 })

@@ -100,4 +100,39 @@
     <text class="quote-text">{{motivationQuote}}</text>
     <text class="quote-author">— {{quoteAuthor}}</text>
   </view>
+
+  <!-- 激励功能区域 -->
+  <view class="reward-section">
+    <view class="reward-card">
+      <view class="reward-header">
+        <text class="reward-title">观看广告获得奖励</text>
+        <text class="reward-subtitle">看广告解锁更多功能</text>
+      </view>
+      
+      <view class="reward-benefits">
+        <view class="benefit-item">
+          <text class="benefit-icon">💰</text>
+          <text class="benefit-text">获得学习积分</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-icon">🔓</text>
+          <text class="benefit-text">解锁高级功能</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-icon">📊</text>
+          <text class="benefit-text">查看详细报告</text>
+        </view>
+      </view>
+      
+      <button class="watch-ad-btn" bindtap="watchRewardedAd">
+        <text class="btn-icon">📺</text>
+        <text class="btn-text">观看视频广告</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- Banner广告占位 -->
+  <view class="banner-ad-placeholder" wx:if="{{showBannerAd}}">
+    <text class="ad-label">广告</text>
+  </view>
 </view>

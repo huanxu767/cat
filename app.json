@@ -55,6 +55,12 @@
     "request": 10000,
     "downloadFile": 10000
   },
+  "plugins": {
+    "adPlugin": {
+      "version": "1.0.0",
+      "provider": "wx3507c6682e0ac4e8"
+    }
+  },
   "debug": false,
   "sitemapLocation": "sitemap.json"
 }

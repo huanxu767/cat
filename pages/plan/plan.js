@@ -421,6 +421,11 @@ Page({
 
   // 快速规划
   quickAction: function() {
+    // 显示插屏广告
+    if (app.globalData.adManager) {
+      app.globalData.adManager.showInterstitialAd()
+    }
+    
     wx.showActionSheet({
       itemList: ['AI智能规划', '导入简历', '行业分析', '薪资对比'],
       success: (res) => {

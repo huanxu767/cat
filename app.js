@@ -1,4 +1,6 @@
 // 年薪百万小程序主入口
+const adManager = require('./utils/adManager')
+
 App({
   onLaunch: function () {
     console.log('年薪百万小程序启动')
@@ -8,6 +10,9 @@ App({
     
     // 检查小程序更新
     this.checkForUpdate()
+    
+    // 初始化广告
+    this.initAds()
   },
 
   onShow: function (options) {
@@ -62,9 +67,16 @@ App({
     }
   },
 
+  // 初始化广告
+  initAds: function() {
+    // 广告管理器已在模块加载时自动初始化
+    console.log('广告系统初始化完成')
+  },
+
   // 全局数据
   globalData: {
     userData: null,
-    version: '1.0.0'
+    version: '1.0.0',
+    adManager: adManager
   }
 })

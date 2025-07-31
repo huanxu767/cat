@@ -354,3 +354,123 @@
 .motivation-card {
   animation-delay: 0.3s;
 }
+
+/* 激励广告区域样式 */
+.reward-section {
+  margin-bottom: 30rpx;
+}
+
+.reward-card {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(255, 107, 107, 0.3);
+}
+
+.reward-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.reward-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.reward-subtitle {
+  font-size: 26rpx;
+  opacity: 0.9;
+  display: block;
+}
+
+.reward-benefits {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30rpx;
+}
+
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.benefit-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.benefit-text {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.watch-ad-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.watch-ad-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0.98);
+}
+
+.watch-ad-btn .btn-icon {
+  margin-right: 15rpx;
+  font-size: 32rpx;
+}
+
+/* Banner广告占位样式 */
+.banner-ad-placeholder {
+  height: 100rpx;
+  background: #f0f0f0;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+  border: 1rpx dashed #ccc;
+}
+
+.ad-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 广告相关动画 */
+@keyframes adFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reward-section {
+  animation: adFadeIn 0.6s ease-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+}
+
+.banner-ad-placeholder {
+  animation: adFadeIn 0.6s ease-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
